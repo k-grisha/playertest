@@ -13,7 +13,7 @@ public class MainRemote {
 		Messenger messenger = new RemoteMessenger();
 		Player player = new Player(args[0], messenger);
 
-		player.register();
+//		player.register();
 		if (args.length > 1) {
 			player.sendMessage(args[1], "HelLo!");
 		}

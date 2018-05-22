@@ -25,7 +25,7 @@ public class RemoteMessenger implements Messenger {
 		}
 	}
 
-	@Override
+
 	public void registerPlayer(Player player) {
 		this.player = player;
 		try {
@@ -51,11 +51,16 @@ public class RemoteMessenger implements Messenger {
 		new Thread(task).start();
 	}
 
+	@Override
+	public MessageDto getMessage(String name) {
+		return null;
+	}
+
 
 	class MessengerClientImpl implements MessengerClient {
 		@Override
 		public void receiveMessage(MessageDto messageDto) throws RemoteException {
-			player.receiveMessage(messageDto);
+//			player.receiveMessage(messageDto);
 		}
 	}
 }

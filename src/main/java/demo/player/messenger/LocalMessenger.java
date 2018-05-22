@@ -1,26 +1,28 @@
 package demo.player.messenger;
 
 import demo.player.MessageDto;
-import demo.player.Player;
-import demo.player.messenger.Messenger;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class LocalMessenger implements Messenger {
-	private Map<String, Player> players = new HashMap<String, Player>();
+	private Map<String, LinkedBlockingQueue<MessageDto>> playersMessages = new HashMap<>();
 
-	@Override
-	public void registerPlayer(Player player) {
-		players.put(player.getName(), player);
-	}
 
 	@Override
 	public void send(MessageDto messageDto) {
-		Player receiver = players.get(messageDto.to);
-		if (receiver != null) {
-			Runnable task = () -> receiver.receiveMessage(messageDto);
-			new Thread(task).start();
+		LinkedBlockingQueue<MessageDto> messages = playersMessages.computeIfAbsent(messageDto.to, k -> new LinkedBlockingQueue<>());
+		try {
+			messages.put(messageDto);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public MessageDto getMessage(String name) {
+		LinkedBlockingQueue<MessageDto> messages = playersMessages.get(name);
+		return messages != null ? messages.poll() : null;
 	}
 }
