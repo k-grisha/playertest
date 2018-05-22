@@ -1,6 +1,8 @@
 package demo.player;
 
-public class MessageDto {
+import java.io.Serializable;
+
+public class MessageDto implements Serializable {
 	public final String from;
 	public final String to;
 	public final String text;

@@ -1,5 +1,7 @@
 package demo.player;
 
+import demo.player.messenger.Messenger;
+
 public class Player {
 	private final static int MAX_SEND_MESSAGES = 3;
 	private final String name;

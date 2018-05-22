@@ -1,19 +1,15 @@
 package demo.player;
 
-import org.junit.Test;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class MessengerTest {
 
 //	@Test
 	public void baseTest(){
-		MyMain.main();
 	}
 
 //	@Test
