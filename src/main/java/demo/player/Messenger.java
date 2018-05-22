@@ -11,7 +11,10 @@ public class Messenger {
 	}
 
 	public void send(MessageDto messageDto) {
-		Runnable task = () -> players.get(messageDto.to).receiveMessage(messageDto);
-		new Thread(task).start();
+		Player receiver = players.get(messageDto.to);
+		if (receiver != null) {
+			Runnable task = () -> receiver.receiveMessage(messageDto);
+			new Thread(task).start();
+		}
 	}
 }

@@ -1,6 +1,6 @@
 package demo.player;
 
-class MessageDto {
+public class MessageDto {
 	public final String from;
 	public final String to;
 	public final String text;

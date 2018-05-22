@@ -11,8 +11,13 @@ import java.util.concurrent.TimeUnit;
 
 public class MessengerTest {
 
-	@Test
-	public void baseTest() throws IOException, InterruptedException {
+//	@Test
+	public void baseTest(){
+		MyMain.main();
+	}
+
+//	@Test
+	public void processTest() throws IOException, InterruptedException {
 
 		Process p = Runtime.getRuntime().exec("cmd /c dir");
 //		Process p = Runtime.getRuntime().exec(new String[]{"cmd", "/c", "dir"});
