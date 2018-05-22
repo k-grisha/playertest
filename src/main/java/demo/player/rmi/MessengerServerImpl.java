@@ -10,28 +10,26 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class MessengerServerImpl implements MessengerServer {
 
-	private Map<String, MessengerClient> players = new HashMap<>();
+	private Map<String, LinkedBlockingQueue<MessageDto>> playersMessages = new HashMap<>();
 
 	@Override
-	public void registerPlayer(String playerName) throws RemoteException {
-		System.out.println("register new user " + playerName);
-		Registry registry = LocateRegistry.getRegistry(null, 7070);
-
+	public void sendMessage(MessageDto messageDto) {
+		LinkedBlockingQueue<MessageDto> messages = playersMessages.computeIfAbsent(messageDto.to, k -> new LinkedBlockingQueue<>());
 		try {
-			MessengerClient messengerClient = (MessengerClient) registry.lookup(playerName);
-			players.put(playerName, messengerClient);
-		} catch (NotBoundException e) {
+			messages.put(messageDto);
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void send(MessageDto messageDto) throws RemoteException {
-		System.out.println("sen new msg " + messageDto);
-		players.get(messageDto.to).receiveMessage(messageDto);
+	public MessageDto getMessage(String name) {
+		LinkedBlockingQueue<MessageDto> messages = playersMessages.get(name);
+		return messages != null ? messages.poll() : null;
 	}
 
 	public static void main(String[] args) {
@@ -39,7 +37,7 @@ public class MessengerServerImpl implements MessengerServer {
 		try {
 			MessengerServer stub = (MessengerServer) UnicastRemoteObject.exportObject(messengerServer, 0);
 			Registry registry = LocateRegistry.createRegistry(7070);
-			registry.bind("Messenger", stub);
+			registry.bind("MessengerServer", stub);
 
 			System.out.println("MessengerServer started");
 

@@ -34,7 +34,7 @@ public class Player {
 			scheduledFuture.cancel(false);
 			return;
 		}
-		messenger.send(new MessageDto(name, to, text + String.format("%02d", sentCounter)));
+		messenger.sendMessage(new MessageDto(name, to, text + String.format("%02d", sentCounter)));
 		sentCounter++;
 	}
 

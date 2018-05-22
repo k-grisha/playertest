@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 
 public interface MessengerServer extends Remote {
 
-	void registerPlayer(String playerName) throws RemoteException;
+	 MessageDto getMessage(String playerName) throws RemoteException;
 
-	void send(MessageDto messageDto) throws RemoteException;
+	void sendMessage(MessageDto messageDto) throws RemoteException;
 }

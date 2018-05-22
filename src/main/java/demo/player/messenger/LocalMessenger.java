@@ -9,9 +9,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class LocalMessenger implements Messenger {
 	private Map<String, LinkedBlockingQueue<MessageDto>> playersMessages = new HashMap<>();
 
-
 	@Override
-	public void send(MessageDto messageDto) {
+	public void sendMessage(MessageDto messageDto) {
 		LinkedBlockingQueue<MessageDto> messages = playersMessages.computeIfAbsent(messageDto.to, k -> new LinkedBlockingQueue<>());
 		try {
 			messages.put(messageDto);

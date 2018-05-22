@@ -4,6 +4,6 @@ import demo.player.MessageDto;
 import demo.player.Player;
 
 public interface Messenger {
-	void send(MessageDto messageDto);
+	void sendMessage(MessageDto messageDto);
 	MessageDto getMessage(String name);
 }

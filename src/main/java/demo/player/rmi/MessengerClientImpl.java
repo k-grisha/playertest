@@ -18,7 +18,7 @@ public class MessengerClientImpl implements MessengerClient {
 //		try {
 //			Registry registry = LocateRegistry.getRegistry(null, 7070);
 //			MessengerServer messenger = (MessengerServer)registry.lookup("Messenger");
-//			messenger.registerPlayer("GRIII");
+//			messenger.getMessage("GRIII");
 //
 //		} catch (RemoteException | NotBoundException e) {
 //			e.printStackTrace();
