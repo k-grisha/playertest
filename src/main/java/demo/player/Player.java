@@ -24,8 +24,8 @@ public class Player {
 	private void getMessage() {
 		MessageDto messageDto = messenger.getMessage(name);
 		if (messageDto != null) {
-			System.out.println("My name is " + name + ", I got a message " + messageDto);
-			sendMessage(messageDto.from, messageDto.text);
+			System.out.println(String.format("My name is %s, I got a message from %s. Text: '%s'", name, messageDto.from, messageDto.text));
+			sendMessage(messageDto.from, messageDto.text.substring(0, messageDto.text.length() - 2));
 		}
 	}
 
