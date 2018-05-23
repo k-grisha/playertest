@@ -1,7 +1,6 @@
 package demo.player.messenger;
 
 import demo.player.MessageDto;
-import demo.player.rmi.MessengerClient;
 import demo.player.rmi.MessengerServer;
 
 import java.rmi.NotBoundException;

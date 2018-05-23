@@ -1,35 +1,26 @@
 package demo.player.rmi;
 
 import demo.player.MessageDto;
+import demo.player.messenger.LocalMessenger;
 
 import java.rmi.AlreadyBoundException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.LinkedBlockingQueue;
 
 public class MessengerServerImpl implements MessengerServer {
 
-	private Map<String, LinkedBlockingQueue<MessageDto>> playersMessages = new HashMap<>();
+	private LocalMessenger localMessenger = new LocalMessenger();
 
 	@Override
 	public void sendMessage(MessageDto messageDto) {
-		LinkedBlockingQueue<MessageDto> messages = playersMessages.computeIfAbsent(messageDto.to, k -> new LinkedBlockingQueue<>());
-		try {
-			messages.put(messageDto);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		localMessenger.sendMessage(messageDto);
 	}
 
 	@Override
 	public MessageDto getMessage(String name) {
-		LinkedBlockingQueue<MessageDto> messages = playersMessages.get(name);
-		return messages != null ? messages.poll() : null;
+		return localMessenger.getMessage(name);
 	}
 
 	public static void main(String[] args) {
