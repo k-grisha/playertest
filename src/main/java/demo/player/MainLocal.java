@@ -10,8 +10,8 @@ public class MainLocal {
 	 */
 	public static void main(String[] args) {
 		Messenger messenger = new LocalMessenger();
-		new Player("AAA", messenger);
-		new Player("BBB", messenger).sendMessage("AAA", "Hello!");
+		new Player("Receiver", messenger);
+		new Player("Initiator", messenger).sendMessage("Receiver", "Hello!");
 	}
 
 }
