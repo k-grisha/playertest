@@ -7,6 +7,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Player
+ */
 public class Player {
 	private final static int MAX_MESSAGES = 10;
 	private final String name;
@@ -18,9 +21,11 @@ public class Player {
 	public Player(String name, Messenger messenger) {
 		this.name = name;
 		this.messenger = messenger;
+		// Scheduled check incoming messages
 		scheduler.scheduleAtFixedRate(this::getMessage, 1000, 200, TimeUnit.MILLISECONDS);
 	}
 
+	// check incoming messages
 	private void getMessage() {
 		MessageDto messageDto = messenger.getMessage(name);
 		if (messageDto == null) {
@@ -34,6 +39,12 @@ public class Player {
 		}
 	}
 
+	/**
+	 * Send Message
+	 *
+	 * @param to   receiver name
+	 * @param text text of message
+	 */
 	public void sendMessage(String to, String text) {
 		if (sentCounter >= MAX_MESSAGES) {
 			return;
@@ -42,7 +53,6 @@ public class Player {
 		messenger.sendMessage(new MessageDto(name, to, text + String.format("%02d", sentCounter)));
 		sentCounter++;
 	}
-
 
 	public String getName() {
 		return name;
@@ -55,7 +65,11 @@ public class Player {
 				'}';
 	}
 
-
+	/**
+	 * Method for implementing Player in separate process
+	 *
+	 * @param args playerName [opponentName]
+	 */
 	public static void main(String[] args) {
 		if (args.length < 1) {
 			System.out.println("New Player name missed");

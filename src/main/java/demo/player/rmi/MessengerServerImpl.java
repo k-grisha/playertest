@@ -9,6 +9,10 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+/**
+ * Implementation of RMI server
+ * Wrap {@link LocalMessenger} by RMI
+ */
 public class MessengerServerImpl implements MessengerServer {
 
 	private LocalMessenger localMessenger = new LocalMessenger();
@@ -23,6 +27,9 @@ public class MessengerServerImpl implements MessengerServer {
 		return localMessenger.getMessage(name);
 	}
 
+	/**
+	 * Method for implementing Server in separate process
+	 */
 	public static void main(String[] args) {
 		MessengerServerImpl messengerServer = new MessengerServerImpl();
 		try {

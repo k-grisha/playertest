@@ -8,6 +8,10 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+/**
+ * Messages manager implementation for players in separated process
+ * Wrap server call
+ */
 public class RemoteMessenger implements Messenger {
 	private MessengerServer messengerServer;
 

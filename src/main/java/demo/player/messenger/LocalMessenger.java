@@ -6,7 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * Messages manager implementation for players in the same process
+ */
 public class LocalMessenger implements Messenger {
+	// Store messages in queues for each user
 	private Map<String, LinkedBlockingQueue<MessageDto>> playersMessages = new HashMap<>();
 
 	@Override
