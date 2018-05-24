@@ -7,10 +7,8 @@ public class MainLocal {
 
 	public static void main(String[] args) {
 		Messenger messenger = new LocalMessenger();
-		Player p1 = new Player("AAA", messenger);
-		Player p2 = new Player("BBB", messenger);
-		p1.sendMessage("BBB", "HelLo!");
+		new Player("AAA", messenger);
+		new Player("BBB", messenger).sendMessage("AAA", "Hello!");
 	}
-
 
 }
