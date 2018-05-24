@@ -29,9 +29,7 @@ public class MessengerServerImpl implements MessengerServer {
 			MessengerServer stub = (MessengerServer) UnicastRemoteObject.exportObject(messengerServer, 0);
 			Registry registry = LocateRegistry.createRegistry(7070);
 			registry.bind("MessengerServer", stub);
-
-			System.out.println("MessengerServer started");
-
+			System.out.println("MessengerServer started...");
 		} catch (RemoteException | AlreadyBoundException e) {
 			e.printStackTrace();
 		}

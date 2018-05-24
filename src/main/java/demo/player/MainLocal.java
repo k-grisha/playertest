@@ -5,6 +5,9 @@ import demo.player.messenger.Messenger;
 
 public class MainLocal {
 
+	/**
+	 * Start Players in the same Java process
+	 */
 	public static void main(String[] args) {
 		Messenger messenger = new LocalMessenger();
 		new Player("AAA", messenger);

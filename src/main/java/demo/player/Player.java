@@ -1,13 +1,14 @@
 package demo.player;
 
 import demo.player.messenger.Messenger;
+import demo.player.messenger.RemoteMessenger;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class Player {
-	private final static int MAX_MESSAGES = 1;
+	private final static int MAX_MESSAGES = 10;
 	private final String name;
 	private final Messenger messenger;
 	private int sentCounter;
@@ -52,5 +53,18 @@ public class Player {
 		return "Player{" +
 				"name='" + name + '\'' +
 				'}';
+	}
+
+
+	public static void main(String[] args) {
+		if (args.length < 1) {
+			System.out.println("New Player name missed");
+			return;
+		}
+		Messenger messenger = new RemoteMessenger();
+		Player player = new Player(args[0], messenger);
+		if (args.length > 1) {
+			player.sendMessage(args[1], "HelLo!");
+		}
 	}
 }
